@@ -78,4 +78,20 @@ public class ReviewControllerTest {
         .andExpect(expectedType);
 
   }
+
+  @Test
+  public void test4_deleteReview() throws Exception {
+
+    mockMvc
+        .perform(delete("/" + "Review".toLowerCase() + "s/5"))
+        .andExpect(deletedStatus);
+  }
+
+  @Test
+  public void test5_getReviewForInvalidId() throws Exception {
+
+    mockMvc
+        .perform(get("/" + "Review".toLowerCase() + "/5"))
+        .andExpect(notFoundStatus);
+  }
 }
