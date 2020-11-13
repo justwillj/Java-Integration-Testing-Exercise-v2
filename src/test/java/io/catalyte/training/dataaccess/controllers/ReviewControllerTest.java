@@ -68,7 +68,7 @@ public class ReviewControllerTest {
 
     String json = "{\"title\":\"Eat my dust\",\"description\":\"Vanishing Point. Enough said.\",\"rating\":5,\"date\":\"2014-09-18\",\"username\":\"Steve McQueen\",\"vehicle\":{\"id\":1,\"type\":\"Car\",\"make\":\"Dodge\",\"model\":\"Challenger\",\"year\":2010}}";
 
-    this.mockMvc
+    mockMvc
         .perform(post("/reviews")
             .contentType(MediaType.APPLICATION_JSON)
             .content(json))
@@ -82,18 +82,16 @@ public class ReviewControllerTest {
   public void deleteReview() throws Exception {
 
     mockMvc
-        .perform(delete("/reviews/5"))
+        .perform(delete("/reviews/1"))
         .andExpect(deletedStatus);
   }
 
   @Test
   public void getReviewForInvalidIdReturnsNotFound() throws Exception {
 
+   
     mockMvc
-        .perform(delete("/reviews/5"));
-
-    mockMvc
-        .perform(get("/reviews/5"))
+        .perform(get("/reviews/55555"))
         .andExpect(notFoundStatus);
   }
 }
