@@ -24,7 +24,6 @@ import static org.hamcrest.Matchers.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ReviewControllerTest {
 
   @Autowired
@@ -45,32 +44,32 @@ public class ReviewControllerTest {
   }
 
   @Test
-  public void test1_getReviews() throws Exception {
+  public void getReviews() throws Exception {
 
     mockMvc
-        .perform(get("/" + "Reviews".toLowerCase()))
+        .perform(get("/reviews"))
         .andExpect(jsonPath("$", hasSize(4)))
         .andExpect(okStatus)
         .andExpect(expectedType);
   }
 
   @Test
-  public void test2_getReview() throws Exception {
+  public void getSingleReview() throws Exception {
 
     mockMvc
-        .perform(get("/" + "Review".toLowerCase() + "s/1"))
+        .perform(get("/reviews/1"))
         .andExpect(jsonPath("$.title", is("Challengers rock!")))
         .andExpect(okStatus)
         .andExpect(expectedType);
   }
 
   @Test
-  public void test3_postReview() throws Exception {
+  public void postSingleReview() throws Exception {
 
     String json = "{\"title\":\"Eat my dust\",\"description\":\"Vanishing Point. Enough said.\",\"rating\":5,\"date\":\"2014-09-18\",\"username\":\"Steve McQueen\",\"vehicle\":{\"id\":1,\"type\":\"Car\",\"make\":\"Dodge\",\"model\":\"Challenger\",\"year\":2010}}";
 
     this.mockMvc
-        .perform(post("/" + "Review".toLowerCase() + "s")
+        .perform(post("/reviews")
             .contentType(MediaType.APPLICATION_JSON)
             .content(json))
         .andExpect(jsonPath("$.title", is("Eat my dust")))
@@ -80,18 +79,21 @@ public class ReviewControllerTest {
   }
 
   @Test
-  public void test4_deleteReview() throws Exception {
+  public void deleteReview() throws Exception {
 
     mockMvc
-        .perform(delete("/" + "Review".toLowerCase() + "s/5"))
+        .perform(delete("/reviews/5"))
         .andExpect(deletedStatus);
   }
 
   @Test
-  public void test5_getReviewForInvalidId() throws Exception {
+  public void getReviewForInvalidIdReturnsNotFound() throws Exception {
 
     mockMvc
-        .perform(get("/" + "Review".toLowerCase() + "/5"))
+        .perform(delete("/reviews/5"));
+
+    mockMvc
+        .perform(get("/reviews/5"))
         .andExpect(notFoundStatus);
   }
 }
