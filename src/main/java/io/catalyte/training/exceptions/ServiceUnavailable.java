@@ -1,6 +1,4 @@
-package io.catalyte.training.dataaccess.exceptions;
-
-import org.hibernate.JDBCException;
+package io.catalyte.training.exceptions;
 
 public class ServiceUnavailable extends RuntimeException {
 

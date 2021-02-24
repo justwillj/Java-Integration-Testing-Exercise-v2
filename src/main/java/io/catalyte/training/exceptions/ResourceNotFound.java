@@ -1,4 +1,4 @@
-package io.catalyte.training.dataaccess.exceptions;
+package io.catalyte.training.exceptions;
 
 public class ResourceNotFound extends RuntimeException {
 

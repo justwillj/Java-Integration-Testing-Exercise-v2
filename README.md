@@ -1,24 +1,11 @@
-# Java Integration Testing Exercise 
+# Mocking with Mockito
 
-This project utilizes the latest solution to the Vehicle/Reviews project as a starting point for the Integration Testing exercise.
+### Utilizing Mockito for unit tests
 
-### Getting Started
+This project illustrates how to utilize Mockito to test an existing service in a REST Api created with Spring Data.
 
-***Database Connection***
-* This application uses the embedded H2 Database in memory. 
+Interaction with the repositories has been mocked so that interaction with the database is not necessary in order 
+to complete the unit tests.
 
-* When Spring sees there is no application.yml, it will default to this database.
-
-##Running Tests
-* To run tests, right-click on the controllers package in the test folder and select **_Run Tests with Coverage_**
-
-* Integration tests cover payload, content type, and status code tests of all 2XX
-
-* Code coverage can be viewed by right-clicking on the controller package and selecting Run with Coverage.
-
-* Coverage can also be run subsequently in the top right corner white and green shield symbol.
- 
-## Linting
-* This project uses Google's Java coding standards.
-* You can lint any code block by pressing `CTRL + ALT + l`.
-
+### Code Coverage
+Code coverage can be viewed by right-clicking on the test class and selecting _Run with Coverage_.

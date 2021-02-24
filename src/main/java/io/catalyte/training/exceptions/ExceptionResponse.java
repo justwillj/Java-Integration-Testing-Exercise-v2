@@ -1,10 +1,7 @@
-package io.catalyte.training.dataaccess.exceptions;
+package io.catalyte.training.exceptions;
 
 import java.util.Date;
 
-/**
- * The response object returned by all of the exception handlers.
- */
 public class ExceptionResponse {
 
   private Date timestamp;
