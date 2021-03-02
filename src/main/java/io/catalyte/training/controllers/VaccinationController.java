@@ -90,7 +90,7 @@ public class VaccinationController {
   }
 
   @GetMapping(value = "/breed/{breed}/count")
-  public ResponseEntity<Integer> getVaccinationCountByMakeAndModelBreed(@PathVariable String breed) {
+  public ResponseEntity<Integer> getVaccinationCountByBreed(@PathVariable String breed) {
     logger.info(new Date()+ LOGGER_REQUEST_BY_BREED_RECEIVED+ breed);
     return new ResponseEntity<>(VaccinationService.getVaccinationCountByBreed(breed), HttpStatus.OK);
   }

@@ -81,7 +81,7 @@ public class Pet {
         + ", name='"
         + name
         + '\''
-        + ", make='"
+        + ", breed='"
         + breed
         + '\''
         + ", age="

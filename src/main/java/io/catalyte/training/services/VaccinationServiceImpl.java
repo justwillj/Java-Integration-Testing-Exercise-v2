@@ -146,9 +146,9 @@ public class VaccinationServiceImpl implements VaccinationService {
   }
 
   /**
-   * Returns only the count of Vaccinations related to a certain make and model combination.
+   * Returns only the count of Vaccinations related to a breed of Pet.
    *
-   * @param breed - the make of Pet that Vaccinations should be related to.
+   * @param breed - the breed of Pet that Vaccinations should be related to.
    * @return an integer that represents the count of vacs for that breed
    */
   public Integer getVaccinationCountByBreed(String breed) {
