@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This controller holds CRUD methods for the Pet entity
+ * This controller holds CRUD methods for the Vaccination entity
  */
 @RestController
 @RequestMapping(CONTEXT_VACCINATIONS)
