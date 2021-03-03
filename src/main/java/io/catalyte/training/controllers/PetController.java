@@ -49,7 +49,7 @@ public class PetController {
    * @return the Pet with said id
    */
   @GetMapping(value = "/{id}")
-  @ApiOperation("Finds a Customer by Id")
+  @ApiOperation("Finds a Pet by Id")
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "OK", response = Pet.class),
       @ApiResponse(code = 404, message = "NOT FOUND")
@@ -116,7 +116,7 @@ public class PetController {
   }
 
   /**
-   * Update customer by id customer.
+   * Update pet by id 
    *
    * @param id       the id of the pet to be updated from the path variable
    * @param pet the pet's new information from the request body
