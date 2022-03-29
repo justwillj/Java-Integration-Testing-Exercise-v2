@@ -1,5 +1,10 @@
 package io.catalyte.training.exceptions;
 
+import static io.catalyte.training.constants.StringConstants.NOT_FOUND;
+import static io.catalyte.training.constants.StringConstants.SERVER_ERROR;
+
+import java.util.Date;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -7,17 +12,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.util.Date;
-import java.util.List;
-
-import static io.catalyte.training.constants.StringConstants.NOT_FOUND;
-import static io.catalyte.training.constants.StringConstants.SERVER_ERROR;
-
 /**
  * A controller advice allows you to use exactly the same exception handling techniques but apply
  * them across the whole application, not just to an individual controller. You can think of them as
- * an annotation driven interceptor. More info:
- * https://www.baeldung.com/exception-handling-for-rest-with-spring
+ * an annotation driven interceptor. More info: https://www.baeldung.com/exception-handling-for-rest-with-spring
  */
 @ControllerAdvice
 public class ExceptionController {

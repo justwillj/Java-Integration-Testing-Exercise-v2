@@ -14,7 +14,7 @@ public class StringConstants {
   public static final String CONTEXT_VACCINATIONS = "/vaccinations";
 
   public static final String REQUIRED_FIELD = " is a required field";
-  public static final String ID_NOT_FOUND =  "You attempted an operation on an id that does not exist in the database";
+  public static final String ID_NOT_FOUND = "You attempted an operation on an id that does not exist in the database";
   public static final String LOGGER_REQUEST_RECEIVED = " Get request received for: ";
   public static final String LOGGER_REQUEST_BY_BREED_RECEIVED = " Get request received for breed: ";
   public static final String LOGGER_POST_REQUEST_RECEIVED = " POST request received";

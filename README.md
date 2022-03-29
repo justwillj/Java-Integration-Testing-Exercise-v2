@@ -1,6 +1,7 @@
 # Java Integration Testing with Spring Boot
 
 ### Running Integration Tests
+
 * Start the container.
 * Look Under src\test\java\io\catalyte\training for the controllers package.
 * Right click controllers and run tests in io.catalyte.training.controllers.
@@ -11,4 +12,6 @@
 * Real data is manipulated in my integration tests.
 
 ### Code Coverage
-Code coverage can be viewed by right-clicking on the VaccinationServiceImplTest class and selecting _Run with Coverage_.
+
+Code coverage can be viewed by right-clicking on the VaccinationServiceImplTest class and
+selecting _Run with Coverage_.

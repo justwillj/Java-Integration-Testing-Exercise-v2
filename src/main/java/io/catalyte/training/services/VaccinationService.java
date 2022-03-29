@@ -1,7 +1,6 @@
 package io.catalyte.training.services;
 
 import io.catalyte.training.entities.Vaccination;
-
 import java.util.List;
 
 public interface VaccinationService {

@@ -8,7 +8,8 @@ public class ExceptionResponse {
   private String error;
   private String errorMessage;
 
-  public ExceptionResponse() {}
+  public ExceptionResponse() {
+  }
 
   public ExceptionResponse(String error, Date timestamp, String errorMessage) {
     this.error = error;

@@ -1,18 +1,20 @@
 package io.catalyte.training.entities;
 
+import static io.catalyte.training.constants.StringConstants.REQUIRED_FIELD;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.OptBoolean;
 import java.util.Date;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
+import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
-
-import static io.catalyte.training.constants.StringConstants.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Vaccination {
@@ -33,7 +35,8 @@ public class Vaccination {
   @NotNull
   private Pet pet;
 
-  public Vaccination() {}
+  public Vaccination() {
+  }
 
   public Vaccination(
       @NotBlank(message = "Title" + REQUIRED_FIELD) String innoculation,
@@ -106,7 +109,7 @@ public class Vaccination {
   }
 
   @JsonIgnore
-  public boolean isEmpty(){
+  public boolean isEmpty() {
     return Objects.isNull(id) &&
         Objects.isNull(innoculation) &&
         Objects.isNull(date) &&

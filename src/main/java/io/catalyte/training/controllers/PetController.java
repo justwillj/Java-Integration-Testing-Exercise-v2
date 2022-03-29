@@ -9,38 +9,46 @@ import static io.catalyte.training.constants.StringConstants.MESSAGE_OK;
 import static io.catalyte.training.constants.StringConstants.SERVER_ERROR;
 import static io.catalyte.training.constants.StringConstants.SERVICE_UNAVAILABLE;
 
+import io.catalyte.training.entities.Pet;
 import io.catalyte.training.exceptions.ExceptionResponse;
 import io.catalyte.training.exceptions.ServiceUnavailable;
 import io.catalyte.training.services.PetService;
-import io.catalyte.training.entities.Pet;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import java.util.Date;
+import java.util.List;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-
-import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * This controller holds CRUD methods for the Pet entity
  */
 @RestController
 @RequestMapping(CONTEXT_PETS)
-@ApiResponses(value ={
-    @ApiResponse(code=500, message=SERVER_ERROR, response = ExceptionResponse.class),
-    @ApiResponse(code=503, message=SERVICE_UNAVAILABLE, response = ServiceUnavailable.class)
+@ApiResponses(value = {
+    @ApiResponse(code = 500, message = SERVER_ERROR, response = ExceptionResponse.class),
+    @ApiResponse(code = 503, message = SERVICE_UNAVAILABLE, response = ServiceUnavailable.class)
 })
 public class PetController {
 
   private final Logger logger = LoggerFactory.getLogger(PetController.class);
 
-  @Autowired private PetService PetService;
+  @Autowired
+  private PetService PetService;
 
   /**
    * Gets Pet by id.
@@ -61,8 +69,7 @@ public class PetController {
   }
 
   /**
-   * gives me all pets if I pass a null pet or pets matching an example with non-null
-   * pet
+   * gives me all pets if I pass a null pet or pets matching an example with non-null pet
    *
    * @param pet pet object which can have null or non-null fields, returns status 200
    * @return List of pets
@@ -116,9 +123,9 @@ public class PetController {
   }
 
   /**
-   * Update pet by id 
+   * Update pet by id
    *
-   * @param id       the id of the pet to be updated from the path variable
+   * @param id  the id of the pet to be updated from the path variable
    * @param pet the pet's new information from the request body
    * @return the pet  if correctly input
    */
