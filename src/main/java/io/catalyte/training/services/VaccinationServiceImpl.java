@@ -1,7 +1,7 @@
 package io.catalyte.training.services;
 
-import io.catalyte.training.entities.Vaccination;
 import io.catalyte.training.entities.Pet;
+import io.catalyte.training.entities.Vaccination;
 import io.catalyte.training.exceptions.BadDataResponse;
 import io.catalyte.training.exceptions.ResourceNotFound;
 import io.catalyte.training.exceptions.ServiceUnavailable;
@@ -193,6 +193,7 @@ public class VaccinationServiceImpl implements VaccinationService {
     }
 
     // if we made it down to this point, we did not find the Vaccination
-    throw new ResourceNotFound("Could not locate a Vaccination with the innoculation: " + innoculation);
+    throw new ResourceNotFound(
+        "Could not locate a Vaccination with the innoculation: " + innoculation);
   }
 }

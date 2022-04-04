@@ -1,19 +1,18 @@
 package io.catalyte.training.services;
 
 
+import io.catalyte.training.entities.Pet;
 import io.catalyte.training.exceptions.BadDataResponse;
 import io.catalyte.training.exceptions.ResourceNotFound;
-import io.catalyte.training.repositories.VaccinationRepository;
-import io.catalyte.training.repositories.PetRepository;
-import io.catalyte.training.entities.Pet;
 import io.catalyte.training.exceptions.ServiceUnavailable;
+import io.catalyte.training.repositories.PetRepository;
+import io.catalyte.training.repositories.VaccinationRepository;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service
@@ -21,12 +20,14 @@ public class PetServiceImpl implements PetService {
 
   private final Logger logger = LoggerFactory.getLogger(PetServiceImpl.class);
 
-  @Autowired private PetRepository PetRepository;
-  @Autowired private VaccinationRepository VaccinationRepository;
+  @Autowired
+  private PetRepository PetRepository;
+  @Autowired
+  private VaccinationRepository VaccinationRepository;
 
   /**
-   * This method accepts Pets as an optional parameter. When it is supplied, we create a query
-   * by example. Otherwise, we get all Pets.
+   * This method accepts Pets as an optional parameter. When it is supplied, we create a query by
+   * example. Otherwise, we get all Pets.
    *
    * @param Pet - any provided fields will be converted to an exact match AND query
    * @return
@@ -55,9 +56,10 @@ public class PetServiceImpl implements PetService {
     try {
       Pet pet = PetRepository.findById(id).orElse(null);
 
-      if (pet != null) { return pet;
+      if (pet != null) {
+        return pet;
       }
-    } catch (Exception e){
+    } catch (Exception e) {
       throw new ServiceUnavailable(e);
     }
 
@@ -96,15 +98,14 @@ public class PetServiceImpl implements PetService {
   /**
    * Update an existing Pet in the database.
    *
-   * @param id - the id of the Pet to update.
+   * @param id  - the id of the Pet to update.
    * @param Pet - the Pet information to update.
    * @return
    */
   public Pet updatePetById(Long id, Pet Pet) {
 
     // first, check to make sure the id passed matches the id in the Pet passed
-    if (!Pet.getId().equals(id))
-    {
+    if (!Pet.getId().equals(id)) {
       throw new BadDataResponse("Pet ID must match the ID specified in the URL");
     }
 
@@ -135,8 +136,7 @@ public class PetServiceImpl implements PetService {
         PetRepository.deleteById(id);
         return;
       }
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       throw new ServiceUnavailable(e);
     }
 
