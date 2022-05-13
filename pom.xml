@@ -49,20 +49,6 @@
       <version>2.0.1.Final</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
-    <dependency>
-      <artifactId>springfox-swagger-ui</artifactId>
-      <groupId>io.springfox</groupId>
-      <version>2.9.2</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
-    <dependency>
-      <artifactId>springfox-swagger2</artifactId>
-      <groupId>io.springfox</groupId>
-      <version>2.9.2</version>
-    </dependency>
-
     <dependency>
       <artifactId>h2</artifactId>
       <groupId>com.h2database</groupId>
