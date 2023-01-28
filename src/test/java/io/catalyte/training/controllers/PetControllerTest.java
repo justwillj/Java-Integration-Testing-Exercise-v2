@@ -97,7 +97,17 @@ class PetControllerTest {
   }
 
   @Test
-  void save() {
+  void postNewPet() throws Exception {
+    Pet pet1 = new Pet("Cletus", "Dog", 6);
+    String petAsString = mapper.writeValueAsString(pet1);
+
+    this.mockMvc
+        .perform(post(CONTEXT_PETS)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(petAsString))
+        .andExpect(createdStatus)
+        .andExpect(expectedType)
+        .andExpect(jsonPath("$.breed", is("Dog")));
   }
 
   @Test
