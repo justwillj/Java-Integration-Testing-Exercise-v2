@@ -1,5 +1,9 @@
 package io.catalyte.training.controllers;
 
+import static io.catalyte.training.constants.StringConstants.CONTEXT_PETS;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
@@ -46,6 +51,20 @@ class PetControllerTest {
   }
 
   @Test
-  void getPet() {
+  void getPetsReturnsThree() throws Exception {
+    mockMvc
+        .perform(get(CONTEXT_PETS))
+        .andExpect(okStatus)
+        .andExpect(expectedType)
+        .andExpect(jsonPath("$", hasSize(3)));
+  }
+
+  @Test
+  void getPetThatDoesExistById() throws Exception {
+    mockMvc
+        .perform(get(CONTEXT_PETS + "/1"))
+        .andExpect(okStatus)
+        .andExpect(expectedType)
+        .andExpect(jsonPath("$.name", is("Cletus")));
   }
 }
