@@ -3,15 +3,21 @@ package io.catalyte.training.controllers;
 import static io.catalyte.training.constants.StringConstants.CONTEXT_PETS;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isA;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.catalyte.training.entities.Pet;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
@@ -66,5 +72,39 @@ class PetControllerTest {
         .andExpect(okStatus)
         .andExpect(expectedType)
         .andExpect(jsonPath("$.name", is("Cletus")));
+  }
+
+
+  @Test
+  void saveAllPets() throws Exception{
+    List<Pet> json = new ArrayList<>();
+    Pet pet1 = new Pet("Cletus", "Dog", 6);
+    Pet pet2 = new Pet("Alexander Bunnington", "Rabbit", 3);
+    json.add(pet1);
+    json.add(pet2);
+
+    String jsonAsString = mapper.writeValueAsString(json);
+
+    this.mockMvc
+        .perform(post(CONTEXT_PETS + "/all")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonAsString))
+        .andExpect(createdStatus)
+        .andExpect(expectedType)
+        .andExpect(jsonPath("$", isA(ArrayList.class)))
+        .andExpect(jsonPath("$", hasSize(2)));
+
+  }
+
+  @Test
+  void save() {
+  }
+
+  @Test
+  void updatePetById() {
+  }
+
+  @Test
+  void deletePet() {
   }
 }
