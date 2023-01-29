@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isA;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -111,7 +112,18 @@ class PetControllerTest {
   }
 
   @Test
-  void updatePetById() {
+  void putPet() throws Exception {
+    Pet pet1 = new Pet("Cletus", "Dog", 6);
+    pet1.setId(1L);
+    String petAsString = mapper.writeValueAsString(pet1);
+    this.mockMvc
+        .perform(put(CONTEXT_PETS + "/1")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(petAsString))
+        .andExpect(okStatus)
+        .andExpect(expectedType)
+        .andExpect(jsonPath("$.age", is(6)));
+
   }
 
   @Test
