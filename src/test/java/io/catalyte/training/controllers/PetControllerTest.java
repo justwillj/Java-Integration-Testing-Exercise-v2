@@ -1,6 +1,7 @@
 package io.catalyte.training.controllers;
 
 import static io.catalyte.training.constants.StringConstants.CONTEXT_PETS;
+import static io.catalyte.training.constants.StringConstants.CONTEXT_VACCINATIONS;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isA;
@@ -138,5 +139,12 @@ public class PetControllerTest {
     mockMvc
         .perform(delete(CONTEXT_PETS + "/3"))
         .andExpect(deletedStatus);
+  }
+
+  @Test
+  public void getPetsBadRequest() throws Exception {
+    mockMvc
+        .perform(get(CONTEXT_PETS + "/NOTVALID"))
+        .andExpect(badRequestStatus);
   }
 }
