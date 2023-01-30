@@ -29,7 +29,7 @@ public class Pet {
 
   private Integer age;
 
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "pet",cascade = CascadeType.ALL)
   private Set<Vaccination> Vaccinations = new HashSet<>();
 
   public Pet() {

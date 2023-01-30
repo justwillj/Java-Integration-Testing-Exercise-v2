@@ -4,24 +4,31 @@ import static io.catalyte.training.constants.StringConstants.CONTEXT_PETS;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isA;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.catalyte.training.entities.Pet;
+import io.catalyte.training.services.PetService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -32,7 +39,7 @@ import org.springframework.web.context.WebApplicationContext;
 @DirtiesContext
 @SpringBootTest
 @AutoConfigureMockMvc
-class PetControllerTest {
+public class PetControllerTest {
 
   ResultMatcher okStatus = MockMvcResultMatchers.status().isOk();
   ResultMatcher createdStatus = MockMvcResultMatchers.status().isCreated();
@@ -50,6 +57,7 @@ class PetControllerTest {
   private WebApplicationContext wac;
   private MockMvc mockMvc;
 
+
   @BeforeEach
   public void setUp() {
     DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
@@ -65,7 +73,6 @@ class PetControllerTest {
         .andExpect(expectedType)
         .andExpect(jsonPath("$", hasSize(3)));
   }
-
   @Test
   void getPetThatDoesExistById() throws Exception {
     mockMvc
@@ -96,7 +103,6 @@ class PetControllerTest {
         .andExpect(jsonPath("$", hasSize(2)));
 
   }
-
   @Test
   void postNewPet() throws Exception {
     Pet pet1 = new Pet("Cletus", "Dog", 6);
@@ -126,7 +132,11 @@ class PetControllerTest {
 
   }
 
+
   @Test
-  void deletePet() {
+  void deletePet() throws Exception {
+    mockMvc
+        .perform(delete(CONTEXT_PETS + "/3"))
+        .andExpect(deletedStatus);
   }
 }
