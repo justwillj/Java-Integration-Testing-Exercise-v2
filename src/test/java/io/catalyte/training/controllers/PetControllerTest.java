@@ -142,9 +142,17 @@ public class PetControllerTest {
   }
 
   @Test
-  public void getPetsBadRequest() throws Exception {
+  public void getPetBadRequest() throws Exception {
     mockMvc
         .perform(get(CONTEXT_PETS + "/NOTVALID"))
         .andExpect(badRequestStatus);
   }
+
+  @Test
+  public void getPetThatDoesNotExist() throws Exception {
+    mockMvc
+        .perform(get(CONTEXT_PETS + "/4567890"))
+        .andExpect(notFoundStatus);
+  }
+
 }
